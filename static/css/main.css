@@ -1,0 +1,54 @@
+/* General body styles */
+body {
+    font-family: Arial, sans-serif !important;
+    color: #303C6C !important; /* dark blue */
+    background-color: #D2FDFF !important; /* very light cyan */
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    background-color: #FBE8A6 !important; /* light yellow */
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Navigation styles */
+nav {
+    background-color: #F4976C !important; /* coral */
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none !important; 
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #303C6C !important; /* dark blue */
+    font-weight: bold;
+}
+
+/* Main content area */
+main {
+    padding: 20px;
+    background-color: #B4DFE5 !important; /* light teal */
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #303C6C !important; /* dark blue */
+    color: #D2FDFF; /* very light cyan */
+}
+
+
+
