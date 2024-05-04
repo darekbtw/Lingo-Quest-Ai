@@ -23,6 +23,10 @@ def __repr__(self):
 def index():
     return render_template('index.html')
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route('/learn')
 def learn():
     return render_template('learn.html')
@@ -53,6 +57,10 @@ def login():
         else:
             return redirect(url_for('index'))
     return render_template('login.html', error=error)
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
