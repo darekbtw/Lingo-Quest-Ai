@@ -1,9 +1,20 @@
-{% extends 'base.html' %}
+<html>
+  <head>
+    <title>LingoQuest - Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <h1>LingoQuest Registration</h1>
 
-{% block head %}
-<title>LingoQuest - Register</title>
-{% endblock %}
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      {{ form.username }}
+      {{ form.email }}
+      {{ form.password }}
+      {{ form.submit }}
+    </form>
 
-{% block body %}
-<h1>This is the amazing register page.</h1>
-{% endblock %}
+    <p>Already have an account? <a href="{{url_for('login')}}">Login</a></p>
+  </body>
+</html>
