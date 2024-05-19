@@ -33,8 +33,8 @@
               </li>
           </ul>
           <div class="navbar-text">
-            Logged in as <a href="{{url_for('profile')}}" class="navbar-link">Username</a>
-            <a href="{{url_for('login')}}" class="btn btn-outline-danger my-2 my-sm-0 ml-2">Logout</a>
+            Logged in as <a href="{{url_for('profile')}}" class="navbar-link">{{ current_user.username }}</a>
+            <a href="{{url_for('logout')}}" class="btn btn-outline-danger my-2 my-sm-0 ml-2">Logout</a>
           </div>
         </div>
     </nav>

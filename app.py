@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
@@ -13,7 +13,9 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'main.db')
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -31,7 +33,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(254), unique=True, nullable=False)
-    password_hash = db.Column(db.String(80), nullable=False)
+    password_hash = db.Column(db.String(254), nullable=False)
     join_date = db.Column(db.DateTime, default=datetime.utcnow)
 
 class RegisterForm(FlaskForm):
@@ -62,52 +64,62 @@ class LoginForm(FlaskForm):
 
     submit = SubmitField("Login")
 
-    def validate_username(self, username):
-        existing_user_username = User.query.filter_by(
-            username=username.data).first()
-
-        if existing_user_username:
-            raise ValidationError("Username already exists. Please choose a different one.")
-
 def __repr__(self):
     return '<task %r>' % self.id
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
+@login_required
 def home():
     return render_template('home.html')
 
-@app.route('/learn')
+@app.route('/learn', methods=['GET', 'POST'])
+@login_required
 def learn():
     return render_template('learn.html')
 
-@app.route('/practice')
+@app.route('/practice', methods=['GET', 'POST'])
+@login_required
 def practice():
     return render_template('practice.html')
 
-@app.route('/about')
+@app.route('/about', methods=['GET', 'POST'])
+@login_required
 def about():
     return render_template('about.html')
 
-@app.route('/settings')
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings():
     return render_template('settings.html')
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
     return render_template('profile.html')
-
-# with app.app_context():
-#     db.create_all()
 
 # Route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password_hash, form.password.data):
+                login_user(user)
+                return redirect(url_for('home'))
     return render_template('login.html', form=form)
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
