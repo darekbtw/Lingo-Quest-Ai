@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Chapter 1</title>
+{% endblock %}
+
+{% block body %}
+<h1>Chapter 1 - Menu Selection</h1>
+<div class="chapter-select">
+    <a href="{{ url_for('chapter1learn')}}" class="box">Prepare</a>
+    <a href="{{ url_for('chapter1quest') }}" class="box">Quest</a>
+</div>
+{% endblock %}

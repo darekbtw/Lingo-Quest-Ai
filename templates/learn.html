@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>LingoQuest - Learn</title>
+<title>LingoQuest - Quest</title>
 {% endblock %}
 
 {% block body %}
-<h1>This is the amazing learn page.</h1>
+<h1>Chapter selection</h1>
+<div class="chapter-select">
+    <a href="{{url_for('chapter1')}}" class="box">Chapter 1</a>
+    <a href="page2.html" class="box">Chapter 2</a>
+    <a href="page3.html" class="box">Chapter 3</a>
+    <a href="page4.html" class="box">Chapter 4</a>
+    <a href="page5.html" class="box">Chapter 5</a>
+    <a href="page6.html" class="box">Chapter 6</a>
+    <a href="page7.html" class="box">Chapter 7</a>
+    <a href="page8.html" class="box">Chapter 8</a>
+    <a href="page9.html" class="box">Chapter 9</a>
+    <a href="page10.html" class="box">Chapter 10</a>
+    <a href="page11.html" class="box">Chapter 11</a>
+    <a href="page12.html" class="box">Chapter 12</a>
+</div>
 {% endblock %}

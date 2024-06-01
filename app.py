@@ -81,10 +81,30 @@ def home():
 def learn():
     return render_template('learn.html')
 
-@app.route('/practice', methods=['GET', 'POST'])
+@app.route('/chapter1/learn', methods=['GET', 'POST'])
 @login_required
-def practice():
-    return render_template('practice.html')
+def chapter1learn():
+    return render_template('Chapter1/chapter1learn.html')
+
+@app.route('/chapter1/quest', methods=['GET', 'POST'])
+@login_required
+def chapter1quest():
+    return render_template('Chapter1/chapter1quest.html')
+
+@app.route('/chapter1/quest/school', methods=['GET', 'POST'])
+@login_required
+def chapter1schoolquest():
+    return render_template('Chapter1/quest-school.html')
+
+@app.route('/chapter1/quest/home', methods=['GET', 'POST'])
+@login_required
+def chapter1homequest():
+    return render_template('Chapter1/quest-home.html')
+
+@app.route('/chapter1', methods=['GET', 'POST'])
+@login_required
+def chapter1():
+    return render_template('Chapter1/chapter1.html')
 
 @app.route('/about', methods=['GET', 'POST'])
 @login_required
